@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import {Route, withRouter} from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -10,32 +10,31 @@ import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import Questions from "./Questions/Questions";
 import Question from "./Question/Question";
 import Callback from "./Callback";
+import NewQuestion from "./NewQuestion/NewQuestion";
+import SecuredRoute from "./SecuredRoute/SecuredRoute";
 
 // TODO
 // https://react-bootstrap.github.io/
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {}
     }
-  }
 
+    render() {
+        const apps = [
+            {
+                path: '/questions',
+                component: QuestionsApp
+            },
 
-  render() {
-    const apps = [
-      {
-        path: '/questions',
-        component: QuestionsApp
-      },
-
-      {
-        path: '/products',
-        component: FilterableProductTable
-      }
-    ];
-
+            {
+                path: '/products',
+                component: FilterableProductTable
+            }
+        ];
 
 // ReactDOM.render(
 //   <FilterableProductTable products={PRODUCTS} />,
@@ -43,72 +42,54 @@ class App extends Component {
 // );
 
 
-    // const apps = [
-    //   {
-    //     path: '/questionsApp',
-    //     component: QuestionsApp
-    //   }
-    // ];
+        // const apps = [
+        //   {
+        //     path: '/questionsApp',
+        //     component: QuestionsApp
+        //   }
+        // ];
 
-    const list = [];
+        const rows = [];
+        const routes = [];
 
-    apps.forEach(app => {
-      console.log(app);
-      list.push(
-      <ListGroupItem href={app.path} key={app.path}>
-        {/*<Route path={app.path} component={app.component}>*/}
-          {app.path}
-        {/*</Route>*/}
-      </ListGroupItem>
-      );
-    });
+        apps.forEach(app => {
+            console.log(app);
+            rows.push(
+                <ListGroupItem href={app.path} key={app.path}>
+                    <Link to={app.path}>
+                        {app.path}
+                    </Link>
+                </ListGroupItem>
+            );
 
+            routes.push(
+                <Route path={app.path} component={app.component}/>
+            );
+        });
 
-    return (
-      <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
-            </li>
-          </ul>
+        return (
+            <Router>
+                <div>
+                    {/*<NavBar/>*/}
 
-          <hr />
+                    <ListGroup>
+                        {rows}
+                    </ListGroup>
 
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
+                    <hr />
 
-          {/*-----------------*/}
+                    {routes}
 
-
-          <NavBar/>
-          <Route exact path='/questions' component={QuestionsApp} />
-          <Route exact path='/products' component={FilterableProductTable} />
-
-          <Route exact path='/questions' component={Questions} />
-          <Route exact path='/callback' component={Callback}/>
-
-          {/*<Route exact path='/' component={FilterableProductTable} >*/}
-          {/*<FilterableProductTable products={PRODUCTS} />*/}
-          {/*</Route>*/}
-
-          {/*<FilterableProductTable products={PRODUCTS} />*/}
-
-          <ListGroup>
-            {list}
-          </ListGroup>
-
-        </div>
-      </Router>
-    );
-  }
+                    <Route exact path='/questions' component={Questions} />
+                    <Route exact path='/question/:questionId' component={Question}/>
+                    <Route exact path='/callback' component={Callback}/>
+                    <SecuredRoute path='/new-question'
+                                  component={NewQuestion}
+                                  checkingSession={this.state.checkingSession} />
+                </div>
+            </Router>
+        );
+    }
 }
 
-export default withRouter(App);
+export default App;

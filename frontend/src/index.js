@@ -8,8 +8,8 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
-    {/*<App />*/}
-    {<BasicExample />}
+    <App />
+    {/*{<BasicExample />}*/}
   </BrowserRouter>
 , document.getElementById('root'));
 

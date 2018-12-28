@@ -15,7 +15,7 @@ import SecuredRoute from './SecuredRoute/SecuredRoute';
 // https://react-bootstrap.github.io/
 
 
-class App extends Component {
+class QuestionsApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,28 +39,17 @@ class App extends Component {
   }
 
   render() {
-    const apps = [
-      {
-        path: '/questions',
-        component: 'Questions'
-      },
-
-      {
-        path: '/products',
-        component: 'Products'
-      }
-    ];
-
     return (
       <div>
-        {/*<NavBar/>*/}
+        <NavBar/>
 
-        <Route exact path='/questions' component={Questions} />
-        <Route exact path='/question/:questionId' component={Question}/>
-        <Route exact path='/callback' component={Callback}/>
-        <SecuredRoute path='/new-question'
-                      component={NewQuestion}
-                      checkingSession={this.state.checkingSession} />
+        {/*<Route exact path='/questions' component={Questions} />*/}
+        {/*<Route exact path='/question/:questionId' component={Question}/>*/}
+        {/*<Route exact path='/callback' component={Callback}/>*/}
+        {/*<SecuredRoute path='/new-question'*/}
+                      {/*component={NewQuestion}*/}
+                      {/*checkingSession={this.state.checkingSession} />*/}
+
         {/*<Popup />*/}
         {/*<Popup isLoading={true}> </Popup>*/}
       </div>
@@ -68,4 +57,5 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+// export default withRouter(QuestionsApp);
+export default QuestionsApp;
