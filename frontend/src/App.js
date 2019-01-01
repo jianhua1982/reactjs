@@ -12,6 +12,7 @@ import Question from "./Question/Question";
 import Callback from "./Callback";
 import NewQuestion from "./NewQuestion/NewQuestion";
 import SecuredRoute from "./SecuredRoute/SecuredRoute";
+import BasicExample from './BasicExample';
 
 // TODO
 // https://react-bootstrap.github.io/
@@ -24,30 +25,17 @@ class App extends Component {
     }
 
     render() {
-        const apps = [
-            {
+        const apps = [{
                 path: '/questions',
                 component: QuestionsApp
-            },
-
-            {
+            }, {
                 path: '/products',
                 component: FilterableProductTable
+            }, {
+                path: '/BasicExample',
+                component: BasicExample
             }
         ];
-
-// ReactDOM.render(
-//   <FilterableProductTable products={PRODUCTS} />,
-//   document.getElementById('container')
-// );
-
-
-        // const apps = [
-        //   {
-        //     path: '/questionsApp',
-        //     component: QuestionsApp
-        //   }
-        // ];
 
         const rows = [];
         const routes = [];

@@ -96,5 +96,4 @@ function Components() {
     );
 }
 
-
 export default BasicExample;
